@@ -7,6 +7,9 @@ from subprocess import call
 def _make_osascript_call(command):
 	call(['osascript', '-e', command])
 
+def _make_osascript_call2(command):
+	call(['osascript', command])
+
 host = "10.31.172.96" #cris ip
 port = 13000
 buf = 1024
@@ -21,5 +24,7 @@ while True:
         break
     elif data == "pause" or data =="play":
 		_make_osascript_call('tell app "Spotify" to playpause')
+    elif "spotify:track:" in data:
+		_make_osascript_call('tell app "Spotify" to play track "' + data + '"')
 UDPSock.close()
 os._exit(0)
